@@ -2,14 +2,34 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public String rankTeams(String[] votes) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        if (votes.length == 1) {
+            return votes[0];
         }
+
+        HashMap<Character, int[]> teamRank = new HashMap<>();
+        for (String vote : votes) {
+            for (int i = 0; i < vote.length(); i++) {
+                char c = vote.charAt(i);
+                if (!map.containsKey(c)) {
+                    teamRank.put(c, new int[26]);
+                }
+                teamRank.get(c)[i]++;
+            }
+        }
+
+        String result = teamRank.entrySet().stream()
+                .sorted((entry1, entry2) -> {
+                    for (int i = 0; i < entry1.getValue().length; i++) {
+                        if (entry1.getValue()[i] != entry2.getValue()[i]) {
+                            return entry2.getValue()[i] - entry1.getValue()[i];
+                        }
+                    }
+                    return entry1.getKey() - entry2.getKey();
+                })
+                .map(Map.Entry::getKey)
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+
+        return result;
     }
 }
