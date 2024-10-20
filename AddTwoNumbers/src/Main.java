@@ -22,10 +22,23 @@ public class Main {
     }
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode res = new ListNode(0);
+        ListNode res = new ListNode();
         ListNode current = res;
+        int carry = 0;
+        while (l1 != null || l2 != null || carry > 0) {
+            int l1val = l1 != null ? l1.val : 0;
+            int l2val = l2 != null ? l2.val : 0;
+            int sum = l1val + l2val + carry;
+            current.next = new ListNode(sum % 10);
+            carry = sum / 10;
+            current = current.next;
+            l1 = l1 != null ? l1.next : null;
+            l2 = l2 != null ? l2.next : null;
+        }
 
-        for (int i = 1; i <= 100; i++) {
+
+
+/*        for (int i = 1; i <= 100; i++) {
             current.next = getNext(l1, l2, current.next);
             current = current.next;
             if (l1 != null) l1 = l1.next;
@@ -33,7 +46,7 @@ public class Main {
             if (l1 == null && l2 == null) {
                 break;
             }
-        }
+        }*/
 
         return res.next;
     }
