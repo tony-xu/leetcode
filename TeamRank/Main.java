@@ -1,3 +1,6 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -10,7 +13,7 @@ public class Main {
         for (String vote : votes) {
             for (int i = 0; i < vote.length(); i++) {
                 char c = vote.charAt(i);
-                if (!map.containsKey(c)) {
+                if (!teamRank.containsKey(c)) {
                     teamRank.put(c, new int[26]);
                 }
                 teamRank.get(c)[i]++;

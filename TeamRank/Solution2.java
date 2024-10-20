@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution {
+public class Solution2 {
 
     public String rankTeams(String[] votes) {
         if (votes.length == 1) {
@@ -20,7 +20,7 @@ class Solution {
 
         // create a list of teams, sorted by their vote counts
         ArrayList<Character> list = new ArrayList<>(map.keySet());
-        Collections.sort(list, (a, b) -> {
+        list.sort((a, b) -> {
             for (int i = 0; i < 26; i++) {
                 if (map.get(a)[i] != map.get(b)[i]) {
                     return map.get(b)[i] - map.get(a)[i];
@@ -29,18 +29,11 @@ class Solution {
             return a - b;
         });
 
-/*      StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (Character c : list) {
             sb.append(c);
         }
-        String res = sb.toString();*/
 
-        // convert the list of teams back to an array
-        String res = '';
-        for (Character c : list) {
-            res = res.concat(c);
-        }
-
-        return res;
+        return sb.toString();
     }
 }
